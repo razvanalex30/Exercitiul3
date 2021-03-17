@@ -1,8 +1,6 @@
 import requests
-import pprint
-# import json
-r = requests.get("https://official-joke-api.appspot.com/random_joke")
-print(r.status_code)
-# pprint.pprint(r.text)
-pprint.pprint(r.json())
 
+result = requests.get("https://official-joke-api.appspot.com/jokes/programming/ten")
+print(result.status_code)
+joke = result.json()
+print(joke[0])
