@@ -15,7 +15,7 @@ def get_formatted_data(retrieved_data):
         return ""
 
     elif type(retrieved_data) == dict:
-        return '''
+        return f'''
         id = {retrieved_data['id']} ; 
         type = {retrieved_data['type']} ;
         setup: {retrieved_data['setup']}
