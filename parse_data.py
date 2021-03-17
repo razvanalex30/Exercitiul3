@@ -3,24 +3,24 @@ from retrieve_url import RetrieveUrl
 import random
 
 
-def formatted_data(retrieved_data):
+def get_formatted_data(retrieved_data):
     if type(retrieved_data) == list:
         for elem in retrieved_data:
-            print('''
-            id = {} ; 
-            type = {} ;
-            setup: {}
-            punchline: {}
-            '''.format(elem['id'], elem['type'], elem['setup'], elem['punchline']))
+            print(f'''
+            id = {elem['id']} ; 
+            type = {elem['type']} ;
+            setup: {elem['setup']}
+            punchline: {elem['punchline']}
+            ''')
         return ""
 
     elif type(retrieved_data) == dict:
         return '''
-        id = {} ; 
-        type = {} ;
-        setup: {}
-        punchline: {}
-        '''.format(retrieved_data['id'], retrieved_data['type'], retrieved_data['setup'], retrieved_data['punchline'])
+        id = {retrieved_data['id']} ; 
+        type = {retrieved_data['type']} ;
+        setup: {retrieved_data['setup']}
+        punchline: {retrieved_data['punchline']}
+        '''
     else:
         return "Error!"
 
@@ -30,7 +30,7 @@ class ParseData:
     @classmethod
     def parse_data(cls, path):
         data = RetrieveUrl.retrieve_url(path)
-        jokes_formatted = formatted_data(data)
+        jokes_formatted = get_formatted_data(data)
         print(jokes_formatted)
 
 
