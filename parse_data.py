@@ -34,20 +34,24 @@ class ParseData:
         print(jokes_formatted)
 
 
-print("Hi! Please choose 1 of these 3 inputs")
-print("1 - Random joke, 2 - 10 Random jokes, 3 - Random jokes by type")
+print("""
+Hello! Please choose one of the following three inputs:
+1 - One random joke
+2 - Ten random joke
+3 - One/Ten random jokes by type
+""")
 while True:
     try:
-        chosen_input = int(input("Enter your choice: "))
+        chosen_input = int(input("Enter your choice [1/2/3]: "))
         if chosen_input == 1:
             paths = ["/random_joke", "/jokes/random"]
-            print("You have chosen a random joke!")
+            print("You have chosen One random joke!")
             chosen_path = random.choice(paths)
             ParseData.parse_data(chosen_path)
             break
         elif chosen_input == 2:
             paths = ["/random_ten", "/jokes/ten"]
-            print("You have chosen 10 Random Jokes!")
+            print("You have chosen Ten random jokes!")
             chosen_path = random.choice(paths)
             ParseData.parse_data(chosen_path)
             break
@@ -57,24 +61,25 @@ while True:
             type_value = None
             number = None
             while type_value not in types:
-                type_value = str(input("Please choose a type: "))
+                type_value = str(input("Please choose a type [general|programming|knock-knock]: "))
                 if type_value in types:
                     break
                 else:
-                    print("Try again!\n")
+                    print("Invalid type! Please choose a correct value\n")
             chosen_path = "/jokes/" + type_value
             print("Your type chosen was {}".format(type_value))
             while number not in numbers:
-                number = int(input("Please choose the number of jokes: "))
+                number = int(input("Please choose the number of jokes [1/10]: "))
                 if number in numbers:
                     break
                 else:
-                    print("Try again!")
+                    print("Invalid! Please choose 1 or 10")
             if number == 1:
                 chosen_path += "/random"
+                print("Here is your {} joke!".format(type_value))
             else:
                 chosen_path += "/ten"
-            print("Here are your jokes!")
+                print("Here are your ten {} jokes!".format(type_value))
             ParseData.parse_data(chosen_path)
             break
 
