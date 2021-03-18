@@ -1,10 +1,9 @@
 # import requests
 from retrieve_url import RetrieveUrl
-import random
 
 
 def get_formatted_data(retrieved_data):
-    if type(retrieved_data) == list:
+    if isinstance(retrieved_data, list):
         for elem in retrieved_data:
             print(f'''
             id = {elem['id']} ; 
@@ -14,7 +13,7 @@ def get_formatted_data(retrieved_data):
             ''')
         return ""
 
-    elif type(retrieved_data) == dict:
+    elif isinstance(retrieved_data, dict):
         return f'''
         id = {retrieved_data['id']} ; 
         type = {retrieved_data['type']} ;
@@ -28,32 +27,34 @@ def get_formatted_data(retrieved_data):
 class ParseData:
 
     @classmethod
-    def parse_data(cls, path):
-        data = RetrieveUrl.retrieve_url(path)
+    def parse_data(cls, choice, typee=None, number=None):
+        data = None
+        if choice == 1:
+            data = RetrieveUrl.retrieve_endpoint_1()
+        elif choice == 2:
+            data = RetrieveUrl.retrieve_endpoint_2()
+        elif choice == 3:
+            data = RetrieveUrl.retrieve_endpoint_3(typee, number)
         jokes_formatted = get_formatted_data(data)
         print(jokes_formatted)
 
 
-print("""
-Hello! Please choose one of the following three inputs:
-1 - One random joke
-2 - Ten random joke
-3 - One/Ten random jokes by type
-""")
+# print("""
+# Hello! Please choose one of the following three inputs:
+# 1 - One random joke
+# 2 - Ten random joke
+# 3 - One/Ten random jokes by type
+# """)
 while True:
     try:
         chosen_input = int(input("Enter your choice [1/2/3]: "))
         if chosen_input == 1:
-            paths = ["/random_joke", "/jokes/random"]
             print("You have chosen One random joke!")
-            chosen_path = random.choice(paths)
-            ParseData.parse_data(chosen_path)
+            ParseData.parse_data(chosen_input)
             break
         elif chosen_input == 2:
-            paths = ["/random_ten", "/jokes/ten"]
             print("You have chosen Ten random jokes!")
-            chosen_path = random.choice(paths)
-            ParseData.parse_data(chosen_path)
+            ParseData.parse_data(chosen_input)
             break
         elif chosen_input == 3:
             types = ["general", "programming", "knock-knock"]
@@ -74,13 +75,7 @@ while True:
                     break
                 else:
                     print("Invalid! Please choose 1 or 10")
-            if number == 1:
-                chosen_path += "/random"
-                print("Here is your {} joke!".format(type_value))
-            else:
-                chosen_path += "/ten"
-                print("Here are your ten {} jokes!".format(type_value))
-            ParseData.parse_data(chosen_path)
+            ParseData.parse_data(chosen_input, type_value, number)
             break
 
         print("Please enter a valid number!\n")
