@@ -16,27 +16,14 @@ class AskInput:
                     break
                 elif chosen_input == 2:
                     cls.choice = chosen_input
+                    AskInput.ask_even_odd()
                     break
                 elif chosen_input == 3:
                     cls.choice = chosen_input
-                    types = ["general", "programming", "knock-knock"]
-                    numbers = [1, 10]
-                    type_value = None
-                    nr = None
-                    while type_value not in types:
-                        type_value = str(input("Please choose a type [general|programming|knock-knock]: "))
-                        if type_value in types:
-                            cls.type = type_value
-                            break
-                        else:
-                            print("Invalid type! Please choose a correct value\n")
-                    while nr not in numbers:
-                        nr = int(input("Please choose the number of jokes [1/10]: "))
-                        if nr in numbers:
-                            cls.chosen_number = nr
-                            break
-                        else:
-                            print("Invalid! Please choose 1 or 10")
+                    AskInput.ask_type_jokes()
+                    AskInput.ask_number_jokes()
+                    if cls.chosen_number == "10":
+                        AskInput.ask_even_odd()
                     break
                 print("Please enter a valid number!\n")
             except Exception as e:
@@ -58,3 +45,27 @@ class AskInput:
                     break
             except Exception as e:
                 print(e, "Please choose a valid input!\n")
+
+    @classmethod
+    def ask_type_jokes(cls):
+        types = ["general", "programming", "knock-knock"]
+        type_value = None
+        while type_value not in types:
+            type_value = str(input("Please choose a type [general|programming|knock-knock]: "))
+            if type_value in types:
+                cls.type = type_value
+                break
+            else:
+                print("Invalid type! Please choose a correct value\n")
+
+    @classmethod
+    def ask_number_jokes(cls):
+        numbers = ["1", "10"]
+        nr = None
+        while nr not in numbers:
+            nr = str(input("Please choose the number of jokes [1/10]: "))
+            if nr in numbers:
+                cls.chosen_number = nr
+                break
+            else:
+                print("Invalid! Please choose 1 or 10")

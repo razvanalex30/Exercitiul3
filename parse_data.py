@@ -60,37 +60,22 @@ class ParseData:
         choice = AskInput.choice
         typee = AskInput.type
         nr = AskInput.chosen_number
+        odd_even = AskInput.odd_even
         if choice == 1:
             data = RetrieveUrl.retrieve_endpoint_1()
             jokes_formatted = get_formatted_data(data)
             print(jokes_formatted)
         elif choice == 2:
             data = RetrieveUrl.retrieve_endpoint_2()
-            AskInput.ask_even_odd()
-            odd_even = AskInput.odd_even
-            if odd_even is not None:
-                chosen_jokes = show_odd_even(data, odd_even)
-                jokes_formatted = get_formatted_data(chosen_jokes)
-                print(jokes_formatted)
-            else:
-                jokes_formatted = get_formatted_data(data)
-                print(jokes_formatted)
+            chosen_jokes = show_odd_even(data, odd_even)
+            jokes_formatted = get_formatted_data(chosen_jokes)
+            print(jokes_formatted)
         elif choice == 3:
             data = RetrieveUrl.retrieve_endpoint_3(typee, nr)
-            if nr == 10:
-                check_type(data, typee)
-                AskInput.ask_even_odd()
-                odd_even = AskInput.odd_even
-                if odd_even is not None:
-                    chosen_jokes = show_odd_even(data, odd_even)
-                    jokes_formatted = get_formatted_data(chosen_jokes)
-                    print(jokes_formatted)
-                else:
-                    jokes_formatted = get_formatted_data(data)
-                    print(jokes_formatted)
-            else:
-                jokes_formatted = get_formatted_data(data)
-                print(jokes_formatted)
+            check_type(data, typee)
+            chosen_jokes = show_odd_even(data, odd_even)
+            jokes_formatted = get_formatted_data(chosen_jokes)
+            print(jokes_formatted)
 
 
 ParseData.parse_data()

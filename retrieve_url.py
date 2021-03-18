@@ -32,7 +32,7 @@ class RetrieveUrl:
         types = ["programming", "general", "knock-knock"]
         if typee in types:
             url += typee
-        if number == 1:
+        if number == "1":
             url += "/random"
         else:
             url += "/ten"
