@@ -1,44 +1,4 @@
-# import requests
-from retrieve_url import RetrieveUrl
-
-
-def get_formatted_data(retrieved_data):
-    if isinstance(retrieved_data, list):
-        for elem in retrieved_data:
-            print(f'''
-            id = {elem['id']} ; 
-            type = {elem['type']} ;
-            setup: {elem['setup']}
-            punchline: {elem['punchline']}
-            ''')
-        return ""
-
-    elif isinstance(retrieved_data, dict):
-        return f'''
-        id = {retrieved_data['id']} ; 
-        type = {retrieved_data['type']} ;
-        setup: {retrieved_data['setup']}
-        punchline: {retrieved_data['punchline']}
-        '''
-    else:
-        return "Error!"
-
-
-class ParseData:
-
-    @classmethod
-    def parse_data(cls, choice, typee=None, nr=None):
-        data = None
-        if choice == 1:
-            data = RetrieveUrl.retrieve_endpoint_1()
-        elif choice == 2:
-            data = RetrieveUrl.retrieve_endpoint_2()
-        elif choice == 3:
-            data = RetrieveUrl.retrieve_endpoint_3(typee, nr)
-        jokes_formatted = get_formatted_data(data)
-        print(jokes_formatted)
-
-
+from parse_data import ParseData
 print("""
 Hello! Please choose one of the following three inputs:
 1 - One random joke
