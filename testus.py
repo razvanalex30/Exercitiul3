@@ -4,6 +4,7 @@ class AskInput:
     choice = None
     chosen_number = None
     type = None
+    odd_even = None
 
     @classmethod
     def ask_choice(cls):
@@ -44,3 +45,21 @@ class AskInput:
                 print("Please enter a valid number!\n")
             except Exception as e:
                 print(e, "Please choose a valid input!\n")
+
+    @classmethod
+    def ask_even_odd(cls):
+        while True:
+            try:
+                option = str(input("Do you want to view only the odd/even jokes? "))
+                if option == "odd":
+                    cls.odd_even = option
+                    break
+                elif option == "even":
+                    cls.odd_even = option
+                    break
+                else:
+                    cls.odd_even = None
+                    break
+            except Exception as e:
+                print(e, "Please choose a valid input!\n")
+

@@ -25,65 +25,72 @@ def get_formatted_data(retrieved_data):
         return "Error!"
 
 
+def check_type(input_list, chosen_type):
+    count = 0
+    for elem in input_list:
+        if elem['type'] == chosen_type:
+            count += 1
+    if count == len(input_list):
+        print(f"All jokes are of type {chosen_type}!")
+    else:
+        print(f"Not all jokes are of type {chosen_type}")
+
+
+def show_odd_even(input_list, choice):
+    returned_list = []
+    if choice == "even":
+        for elem in input_list:
+            if int(elem['id']) % 2 == 0:
+                returned_list.append(elem)
+        return returned_list
+    elif choice == "odd":
+        for elem in input_list:
+            if int(elem['id']) % 2 != 0:
+                returned_list.append(elem)
+        return returned_list
+    else:
+        return input_list
+
+
 class ParseData:
 
     @classmethod
     def parse_data(cls):
         AskInput.ask_choice()
-        data = None
         choice = AskInput.choice
         typee = AskInput.type
         nr = AskInput.chosen_number
         if choice == 1:
             data = RetrieveUrl.retrieve_endpoint_1()
+            jokes_formatted = get_formatted_data(data)
+            print(jokes_formatted)
         elif choice == 2:
             data = RetrieveUrl.retrieve_endpoint_2()
+            AskInput.ask_even_odd()
+            odd_even = AskInput.odd_even
+            if odd_even is not None:
+                chosen_jokes = show_odd_even(data, odd_even)
+                jokes_formatted = get_formatted_data(chosen_jokes)
+                print(jokes_formatted)
+            else:
+                jokes_formatted = get_formatted_data(data)
+                print(jokes_formatted)
         elif choice == 3:
             data = RetrieveUrl.retrieve_endpoint_3(typee, nr)
-        jokes_formatted = get_formatted_data(data)
-        print(jokes_formatted)
+            if nr == 10:
+                check_type(data, typee)
+                AskInput.ask_even_odd()
+                odd_even = AskInput.odd_even
+                if odd_even is not None:
+                    chosen_jokes = show_odd_even(data, odd_even)
+                    jokes_formatted = get_formatted_data(chosen_jokes)
+                    print(jokes_formatted)
+                else:
+                    jokes_formatted = get_formatted_data(data)
+                    print(jokes_formatted)
+            else:
+                jokes_formatted = get_formatted_data(data)
+                print(jokes_formatted)
 
 
-# print("""
-# Hello! Please choose one of the following three inputs:
-# 1 - One random joke
-# 2 - Ten random joke
-# 3 - One/Ten random jokes by type
-# """)
-# while True:
-#     try:
-#         chosen_input = int(input("Enter your choice [1/2/3]: "))
-#         if chosen_input == 1:
-#             print("You have chosen One random joke!")
-#             ParseData.parse_data(chosen_input)
-#             break
-#         elif chosen_input == 2:
-#             print("You have chosen Ten random jokes!")
-#             ParseData.parse_data(chosen_input)
-#             break
-#         elif chosen_input == 3:
-#             types = ["general", "programming", "knock-knock"]
-#             numbers = [1, 10]
-#             type_value = None
-#             number = None
-#             while type_value not in types:
-#                 type_value = str(input("Please choose a type [general|programming|knock-knock]: "))
-#                 if type_value in types:
-#                     break
-#                 else:
-#                     print("Invalid type! Please choose a correct value\n")
-#             print("Your type chosen was {}".format(type_value))
-#             while number not in numbers:
-#                 number = int(input("Please choose the number of jokes [1/10]: "))
-#                 if number in numbers:
-#                     break
-#                 else:
-#                     print("Invalid! Please choose 1 or 10")
-#             ParseData.parse_data(chosen_input, type_value, number)
-#             break
-#         print("Please enter a valid number!\n")
-#     except Exception as e:
-#         print(e, "Please choose a valid input!\n")
-
-# AskInput.ask_choice()
 ParseData.parse_data()
