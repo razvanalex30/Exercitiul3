@@ -29,18 +29,13 @@ class RetrieveUrl:
     @classmethod
     def retrieve_endpoint_3(cls, typee, number):
         url = "https://official-joke-api.appspot.com/jokes/"
-        types = ["programming","general","knock-knock"]
+        types = ["programming", "general", "knock-knock"]
         if typee in types:
             url += typee
-        if number == 1 :
+        if number == 1:
             url += "/random"
         else:
             url += "/ten"
         result = requests.get(url)
         joke = result.json()
         return joke
-
-
-
-
-

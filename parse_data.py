@@ -1,6 +1,6 @@
 # import requests
 from retrieve_url import RetrieveUrl
-from testus import AskInput
+from ask_input import AskInput
 
 
 def get_formatted_data(retrieved_data):

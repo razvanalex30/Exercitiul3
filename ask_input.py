@@ -12,11 +12,9 @@ class AskInput:
             try:
                 chosen_input = int(input("Enter your choice [1/2/3]: "))
                 if chosen_input == 1:
-                    print("You have chosen One random joke!")
                     cls.choice = chosen_input
                     break
                 elif chosen_input == 2:
-                    print("You have chosen Ten random jokes!")
                     cls.choice = chosen_input
                     break
                 elif chosen_input == 3:
@@ -32,12 +30,10 @@ class AskInput:
                             break
                         else:
                             print("Invalid type! Please choose a correct value\n")
-                    print("Your type chosen was {}".format(type_value))
                     while nr not in numbers:
                         nr = int(input("Please choose the number of jokes [1/10]: "))
                         if nr in numbers:
                             cls.chosen_number = nr
-                            print(f"Your number of jokes is {nr}")
                             break
                         else:
                             print("Invalid! Please choose 1 or 10")
@@ -62,4 +58,3 @@ class AskInput:
                     break
             except Exception as e:
                 print(e, "Please choose a valid input!\n")
-
