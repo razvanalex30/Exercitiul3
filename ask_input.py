@@ -8,6 +8,12 @@ class AskInput:
 
     @classmethod
     def ask_choice(cls):
+        print('''
+        Hi, please choose one of the following options:
+        1 - One random joke
+        2 - Ten random jokes
+        3 - One/Ten random jokes by type
+        ''')
         while True:
             try:
                 chosen_input = int(input("Enter your choice [1/2/3]: "))
@@ -33,7 +39,8 @@ class AskInput:
     def ask_even_odd(cls):
         while True:
             try:
-                option = str(input("Do you want to view only the odd/even jokes? "))
+                print("Do you want to view only the odd/even jokes? Press Any other key to view them all")
+                option = str(input("Your input: "))
                 if option == "odd":
                     cls.odd_even = option
                     break

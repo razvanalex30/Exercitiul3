@@ -62,16 +62,16 @@ class ParseData:
         nr = AskInput.chosen_number
         odd_even = AskInput.odd_even
         if choice == 1:
-            data = RetrieveUrl.retrieve_endpoint_1()
+            data = RetrieveUrl.retrieve_endpoint(choice)
             jokes_formatted = get_formatted_data(data)
             print(jokes_formatted)
         elif choice == 2:
-            data = RetrieveUrl.retrieve_endpoint_2()
+            data = RetrieveUrl.retrieve_endpoint(choice)
             chosen_jokes = show_odd_even(data, odd_even)
             jokes_formatted = get_formatted_data(chosen_jokes)
             print(jokes_formatted)
         elif choice == 3:
-            data = RetrieveUrl.retrieve_endpoint_3(typee, nr)
+            data = RetrieveUrl.retrieve_endpoint(choice, typee, nr)
             check_type(data, typee)
             chosen_jokes = show_odd_even(data, odd_even)
             jokes_formatted = get_formatted_data(chosen_jokes)
