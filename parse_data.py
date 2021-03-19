@@ -1,7 +1,6 @@
-
 from retrieve_url import RetrieveUrl
 from ask_input import AskInput
-from utils_methods import Utils
+from utils_method import Utils
 
 
 class ParseData:
