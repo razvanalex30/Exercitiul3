@@ -37,8 +37,8 @@ class AskInput:
                         AskInput.ask_even_odd()
                     break
                 print("Please enter a valid number!\n")
-            except Exception as e:
-                print(e, "Please choose a valid input!\n")
+            except ValueError as e:
+                print(e, "Please choose a valid input! Please enter a number!\n")
 
     @classmethod
     def ask_even_odd(cls):
@@ -58,7 +58,7 @@ class AskInput:
                 else:
                     cls.odd_even = None
                     break
-            except Exception as e:
+            except ValueError as e:
                 print(e, "Please choose a valid input!\n")
 
     @classmethod
