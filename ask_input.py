@@ -1,6 +1,7 @@
-# from parse_data import ParseData
-
 class AskInput:
+    """
+    Class used for asking the user for inputs
+    """
     choice = None
     chosen_number = None
     type = None
@@ -8,6 +9,10 @@ class AskInput:
 
     @classmethod
     def ask_choice(cls):
+        """
+        Method used to retrieve the user's choice
+        :return: The choice made by the user
+        """
         print('''
         Hi, please choose one of the following options:
         1 - One random joke
@@ -37,6 +42,9 @@ class AskInput:
 
     @classmethod
     def ask_even_odd(cls):
+        """
+        Method used to check whether the user wants odd/even or all the jokes
+        """
         while True:
             try:
                 print("Do you want to view only the odd/even jokes? Press Any other key to view them all")
@@ -55,6 +63,9 @@ class AskInput:
 
     @classmethod
     def ask_type_jokes(cls):
+        """
+        Method used to select the type of jokes for option 3 (return jokes by type)
+        """
         types = ["general", "programming", "knock-knock"]
         type_value = None
         while type_value not in types:
@@ -67,6 +78,9 @@ class AskInput:
 
     @classmethod
     def ask_number_jokes(cls):
+        """
+        Method used to return the number of jokes by type
+        """
         numbers = ["1", "10"]
         nr = None
         while nr not in numbers:

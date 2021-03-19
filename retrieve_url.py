@@ -3,9 +3,17 @@ import requests
 
 class RetrieveUrl:
     base_url = "https://official-joke-api.appspot.com/jokes/"
-
+    """
+    Class used to retrieve the url path based on user's input
+    """
     @classmethod
     def retrieve_endpoint(cls, choice, typee=None, number=None):
+        """
+        Method used for retrieving data from the URL
+        :param choice: The choice from the user (1 random joke, 10 random jokes or 1/10 random jobes by type)
+        :param typee: The type of joke, if selected
+        :param number: Number of jokes in case of jokes by type
+        """
         if choice == 1:
             cls.base_url += "random"
             result = requests.get(cls.base_url)

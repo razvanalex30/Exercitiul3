@@ -4,6 +4,11 @@ from ask_input import AskInput
 
 
 def get_formatted_data(retrieved_data):
+    """
+    Method used to return the jokes in an easy to read format
+    :param retrieved_data: the list or the dictionary
+    :return: the jokes
+    """
     if isinstance(retrieved_data, list):
         for elem in retrieved_data:
             print(f'''
@@ -26,6 +31,12 @@ def get_formatted_data(retrieved_data):
 
 
 def check_type(input_list, chosen_type):
+    """
+    Method used for checking the type of jokes
+    :param input_list: Input list of jokes
+    :param chosen_type: The type of jokes chosen
+    :return: A message to confirm whether the jokes are the same type or not
+    """
     count = 0
     for elem in input_list:
         if elem['type'] == chosen_type:
@@ -37,6 +48,12 @@ def check_type(input_list, chosen_type):
 
 
 def show_odd_even(input_list, choice):
+    """
+    Method used to show the odd/even jokes from 10 random jokes
+    :param input_list: the input list of jokes
+    :param choice: choose odd/even or all the jokes
+    :return: the jokes
+    """
     returned_list = []
     if choice == "even":
         for elem in input_list:
@@ -53,9 +70,14 @@ def show_odd_even(input_list, choice):
 
 
 class ParseData:
-
+    """
+    Class used to parse the data from the endpoint
+    """
     @classmethod
     def parse_data(cls):
+        """
+        Method used to parse the data from the endpoint according to user's input
+        """
         AskInput.ask_choice()
         choice = AskInput.choice
         typee = AskInput.type
