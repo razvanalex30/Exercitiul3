@@ -2,6 +2,7 @@ class Utils:
     """
     Class used to store the methods regarding data parsing
     """
+
     @classmethod
     def get_formatted_data(cls, retrieved_data):
         """
@@ -10,24 +11,50 @@ class Utils:
         :return: the jokes
         """
         if isinstance(retrieved_data, list):
-            for elem in retrieved_data:
-                print(f'''
-                id = {elem['id']} ; 
-                type = {elem['type']} ;
-                setup: {elem['setup']}
-                punchline: {elem['punchline']}
-                ''')
-            return ""
-
+            try:
+                for elem in retrieved_data:
+                    print(f'''
+                    id = {elem['id']} ; 
+                    type = {elem['type']} ;
+                    setup: {elem['setup']}
+                    punchline: {elem['punchline']}
+                    ''')
+            except KeyError as e:
+                print(e, "There was an error!\n")
+            except ValueError as e:
+                print(e, "VALUE ERROR!\n")
+            else:
+                return ""
         elif isinstance(retrieved_data, dict):
-            return f'''
-            id = {retrieved_data['id']} ; 
-            type = {retrieved_data['type']} ;
-            setup: {retrieved_data['setup']}
-            punchline: {retrieved_data['punchline']}
-            '''
-        else:
-            return "Error!"
+            try:
+                return f'''
+                id = {retrieved_data['id']} ;
+                type = {retrieved_data['type']} ;
+                setup: {retrieved_data['setup']}
+                punchline: {retrieved_data['punchline']}
+                '''
+            except ValueError as e:
+                print(e, "There was an error!\n")
+
+        # if isinstance(retrieved_data, list):
+        #     for elem in retrieved_data:
+        #         print(f'''
+        #         id = {elem['id']} ;
+        #         type = {elem['type']} ;
+        #         setup: {elem['setup']}
+        #         punchline: {elem['punchline']}
+        #         ''')
+        #     return ""
+        #
+        # elif isinstance(retrieved_data, dict):
+        #     return f'''
+        #     id = {retrieved_data['id']} ;
+        #     type = {retrieved_data['type']} ;
+        #     setup: {retrieved_data['setup']}
+        #     punchline: {retrieved_data['punchline']}
+        #     '''
+        # else:
+        #     return "Error!"
 
     @classmethod
     def check_type(cls, input_list, chosen_type):
@@ -38,13 +65,16 @@ class Utils:
         :return: A message to confirm whether the jokes are the same type or not
         """
         count = 0
-        for elem in input_list:
-            if elem['type'] == chosen_type:
-                count += 1
-        if count == len(input_list):
-            print(f"All jokes are of type {chosen_type}!")
+        if chosen_type:
+            for elem in input_list:
+                if elem['type'] == chosen_type:
+                    count += 1
+            if count == len(input_list):
+                print(f"All jokes are of type {chosen_type}!")
+            else:
+                print(f"Not all jokes are of type {chosen_type}")
         else:
-            print(f"Not all jokes are of type {chosen_type}")
+            return ""
 
     @classmethod
     def show_odd_even(cls, input_list, choice):
@@ -55,15 +85,10 @@ class Utils:
         :return: the jokes
         """
         returned_list = []
-        if choice == "even":
-            for elem in input_list:
-                if int(elem['id']) % 2 == 0:
-                    returned_list.append(elem)
-            return returned_list
-        elif choice == "odd":
-            for elem in input_list:
-                if int(elem['id']) % 2 != 0:
-                    returned_list.append(elem)
-            return returned_list
-        else:
+        if not choice:
             return input_list
+        if choice == "even":
+            returned_list = [elem for elem in input_list if int(elem['id']) % 2 == 0]
+        elif choice == "odd":
+            returned_list = [elem for elem in input_list if int(elem['id']) % 2 != 0]
+        return returned_list

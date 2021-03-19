@@ -4,7 +4,7 @@ class AskInput:
     """
     choice = None
     chosen_number = None
-    type = None
+    joke_type = None
     odd_even = None
 
     @classmethod
@@ -19,47 +19,40 @@ class AskInput:
         2 - Ten random jokes
         3 - One/Ten random jokes by type
         ''')
+
         while True:
+            chosen_input = input("Enter your choice [1/2/3]: ")
             try:
-                chosen_input = int(input("Enter your choice [1/2/3]: "))
-                if chosen_input == 1:
-                    cls.choice = chosen_input
-                    break
-                elif chosen_input == 2:
-                    cls.choice = chosen_input
-                    AskInput.ask_even_odd()
-                    break
-                elif chosen_input == 3:
-                    cls.choice = chosen_input
-                    AskInput.ask_type_jokes()
-                    AskInput.ask_number_jokes()
-                    if cls.chosen_number == "10":
-                        AskInput.ask_even_odd()
-                    break
-                print("Please enter a valid number!\n")
+                chosen_input = int(chosen_input)
             except ValueError as e:
                 print(e, "Please choose a valid input! Please enter a number!\n")
+                continue
+            if chosen_input in [1, 2, 3]:
+                break
+            else:
+                print("Please enter a value of 1, 2 or 3!")
+        cls.choice = chosen_input
+        if cls.choice == 2:
+            AskInput.ask_even_odd()
+        elif cls.choice == 3:
+            AskInput.ask_type_jokes()
+            AskInput.ask_number_jokes()
+            if cls.chosen_number == "10":
+                AskInput.ask_even_odd()
 
     @classmethod
     def ask_even_odd(cls):
         """
         Method used to check whether the user wants odd/even or all the jokes
         """
-        while True:
-            try:
-                print("Do you want to view only the odd/even jokes? Press Any other key to view them all")
-                option = str(input("Your input: "))
-                if option == "odd":
-                    cls.odd_even = option
-                    break
-                elif option == "even":
-                    cls.odd_even = option
-                    break
-                else:
-                    cls.odd_even = None
-                    break
-            except ValueError as e:
-                print(e, "Please choose a valid input!\n")
+        print("Do you want to view only the odd/even jokes? Press Any other key to view them all")
+        option = str(input("Your input: "))
+        if option == "odd":
+            cls.odd_even = option
+        elif option == "even":
+            cls.odd_even = option
+        else:
+            cls.odd_even = None
 
     @classmethod
     def ask_type_jokes(cls):
@@ -71,7 +64,7 @@ class AskInput:
         while type_value not in types:
             type_value = str(input("Please choose a type [general|programming|knock-knock]: "))
             if type_value in types:
-                cls.type = type_value
+                cls.joke_type = type_value
                 break
             else:
                 print("Invalid type! Please choose a correct value\n")
